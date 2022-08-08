@@ -1,3 +1,4 @@
+import Exceptions.IndexOutOfBoundExceptions;
 import Exceptions.WrongElementException;
 
 public interface StringList {
@@ -15,7 +16,7 @@ public interface StringList {
     // выбросить исключение.
     // Вернуть добавленный элемент
     // в качестве результата выполнения.
-    String add(int index, String item) throws WrongElementException;
+    String add(int index, String item) throws WrongElementException, IndexOutOfBoundExceptions;
 
     // Установить элемент
     // на определенную позицию,
@@ -24,19 +25,19 @@ public interface StringList {
     // если индекс больше
     // фактического количества элементов
     // или выходит за пределы массива.
-    String set(int index, String item);
+    String set(int index, String item) throws WrongElementException, IndexOutOfBoundExceptions;
 
     // Удаление элемента.
     // Вернуть удаленный элемент
     // или исключение, если подобный
     // элемент отсутствует в списке.
-    String remove(String item);
+    String remove(String item) throws WrongElementException;
 
     // Удаление элемента по индексу.
     // Вернуть удаленный элемент
     // или исключение, если подобный
     // элемент отсутствует в списке.
-    String remove(int index);
+    String remove(int index) throws IndexOutOfBoundExceptions;
 
     // Проверка на существование элемента.
     // Вернуть true/false;
@@ -56,12 +57,12 @@ public interface StringList {
     // Вернуть элемент или исключение,
     // если выходит за рамки фактического
     // количества элементов.
-    String get(int index);
+    String get(int index) throws IndexOutOfBoundExceptions;
 
     // Сравнить текущий список с другим.
     // Вернуть true/false или исключение,
     // если передан null.
-    boolean equals(StringList otherList);
+    boolean equals(StringList otherList) throws WrongElementException;
 
     // Вернуть фактическое количество элементов.
     int size();
