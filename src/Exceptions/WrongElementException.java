@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class WrongElementException extends Exception{
+public class WrongElementException extends RuntimeException {
     public WrongElementException() {
     }
 

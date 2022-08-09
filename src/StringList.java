@@ -63,7 +63,7 @@ public interface StringList {
     // Сравнить текущий список с другим.
     // Вернуть true/false или исключение,
     // если передан null.
-    boolean equals(StringList [] otherList) throws WrongElementException;
+    boolean equals(StringList otherList) throws ArgumentException;
 
     // Вернуть фактическое количество элементов.
     int size();
