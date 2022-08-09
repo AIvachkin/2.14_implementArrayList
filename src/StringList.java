@@ -1,3 +1,4 @@
+import Exceptions.ArgumentException;
 import Exceptions.IndexOutOfBoundExceptions;
 import Exceptions.WrongElementException;
 
@@ -62,7 +63,7 @@ public interface StringList {
     // Сравнить текущий список с другим.
     // Вернуть true/false или исключение,
     // если передан null.
-    boolean equals(StringList otherList) throws WrongElementException;
+    boolean equals(StringList [] otherList) throws WrongElementException;
 
     // Вернуть фактическое количество элементов.
     int size();
@@ -78,6 +79,6 @@ public interface StringList {
     // Создать новый массив
     // из строк в списке
     // и вернуть его.
-    String[] toArray();
+    String[] toArray() throws ArgumentException;
 }
 

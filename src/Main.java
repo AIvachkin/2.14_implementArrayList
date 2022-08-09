@@ -2,6 +2,8 @@ import Exceptions.ArgumentException;
 import Exceptions.IndexOutOfBoundExceptions;
 import Exceptions.WrongElementException;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) throws ArgumentException, WrongElementException, IndexOutOfBoundExceptions {
 
@@ -38,6 +40,14 @@ public class Main {
         System.out.println("arrayList.get(2) = " + arrayList.get(2));
 //        arrayList.get(20);
         System.out.println(arrayList);
+        String[] otherList = {"Earth", "Fruit", "Monkey", "Water"} ;
+        System.out.println(Arrays.toString(otherList));
+        System.out.println(arrayList.equals(otherList));
+        System.out.println("Количество элементов массива: " + arrayList.size());
+        System.out.println(arrayList.isEmpty());
+        arrayList.clear();
+        System.out.println(arrayList);
+        System.out.println(Arrays.toString(arrayList.toArray()));
     }
 
 

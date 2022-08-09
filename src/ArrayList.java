@@ -112,7 +112,7 @@ public class ArrayList implements StringList {
         if (arrayList[index] != null) {
             String item = arrayList[index];
             String[] newArrayList = new String[arrayList.length - 1];
-            if (index != arrayList.length-1 && index != 0) {
+            if (index != arrayList.length - 1 && index != 0) {
                 for (int j = 0; j < index; j++) {
                     newArrayList[j] = arrayList[j];
                 }
@@ -174,33 +174,38 @@ public class ArrayList implements StringList {
     }
 
     @Override
-    public boolean equals(StringList otherList) throws WrongElementException {
+    public boolean equals(StringList[] otherList) throws WrongElementException {
 //        if (otherList == null) {
 //            throw new WrongElementException("Введен нулевоЙ массив");
 //        }
-//        Boolean result = Arrays.equals(arrayList, otherList);
-            return false;
+        Boolean result = Arrays.equals(otherList, arrayList);
+        return false;
 
     }
 
     @Override
     public int size() {
-        return 0;
+        return arrayList.length;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        if (arrayList.length == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void clear() {
-
+arrayList = new String[0];
     }
 
     @Override
-    public String[] toArray() {
-        return new String[0];
+    public String[] toArray() throws ArgumentException {
+        String [] arr = new String[5];
+        return arr;
     }
 
     @Override
