@@ -6,7 +6,7 @@ import java.util.Objects;
 public class ArrayList implements StringList {
 
     private int size;
-    private String[] arrayList;
+    private final String[] arrayList;
 //    private int indexDefault = 0;
 
 
@@ -47,11 +47,11 @@ public class ArrayList implements StringList {
 //        return item;
 
 
-    public void resize(int newLength) {
-        String[] newArrayList = new String[newLength];
-        System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
-        arrayList = newArrayList;
-    }
+//    public void resize(int newLength) {
+//        String[] newArrayList = new String[newLength];
+//        System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
+//        arrayList = newArrayList;
+//    }
 
     @Override
     public String add(int index, String item) {
