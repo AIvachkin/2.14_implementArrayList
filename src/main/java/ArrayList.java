@@ -11,6 +11,7 @@ public class ArrayList implements StringList {
 
 
     public ArrayList() {
+
         arrayList = new String[5];
     }
 
