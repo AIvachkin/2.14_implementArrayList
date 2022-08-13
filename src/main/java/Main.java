@@ -8,9 +8,9 @@ public class Main {
 
     public static void main(String[] args) throws WrongElementException {
 
-        ArrayListInteger arrayListInteger = new ArrayListInteger(100_000);
+//        ArrayListInteger arrayListInteger = new ArrayListInteger(100_000);
 //        Integer[] out = arrayListInteger.toArray();
-        System.out.println(arrayListInteger.contains(250000));
+//        System.out.println(arrayListInteger.contains(250000));
 
 
 

@@ -71,10 +71,10 @@ public class ArrayListInteger {
             throw new WrongElementException();
         }
 
-        return remove(index);
+        return removeByIndex(index);
     }
 
-    public Integer remove(int index) {
+    public Integer removeByIndex(int index) {
 
         validateIndex(index);
 
@@ -166,8 +166,8 @@ public class ArrayListInteger {
         }
     }
 
-    public Integer[] toArray() {
-        return Arrays.copyOf(arrayListInteger, 100000);
+    public Integer[] toArray(int size) {
+        return Arrays.copyOf(arrayListInteger, size);
     }
 
     @Override
