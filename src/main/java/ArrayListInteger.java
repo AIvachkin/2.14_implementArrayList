@@ -17,6 +17,18 @@ public class ArrayListInteger {
         }
     }
 
+    public void sortInsertion(Integer[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int temp = arr[i];
+            int j = i;
+            while (j > 0 && arr[j - 1] >= temp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = temp;
+        }
+    }
+
     public Integer add(Integer item) {
 
         validateSize();
@@ -75,8 +87,23 @@ public class ArrayListInteger {
     }
 
     public boolean contains(Integer item) {
-        return indexOf(item) > -1;
+        sortInsertion(arrayListInteger);
+        int min = 0;
+        int max = arrayListInteger.length - 1;
+        while (min <= max) {
+            int mid = (min + max) / 2;
+            if (item == arrayListInteger[mid]) {
+                return true;
+            }
+            if (item < arrayListInteger[mid]) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+        return false;
     }
+
 
     public int indexOf(Integer item) {
         for (int i = 0; i < size; i++) {
@@ -106,14 +133,18 @@ public class ArrayListInteger {
 //    }
 
     public int size() {
+
         return size;
     }
 
     public boolean isEmpty() {
+
         return size == 0;
     }
 
+
     public void clear() {
+
         size = 0;
     }
 
@@ -136,11 +167,12 @@ public class ArrayListInteger {
     }
 
     public Integer[] toArray() {
-        return Arrays.copyOf(arrayListInteger, 10);
+        return Arrays.copyOf(arrayListInteger, 100000);
     }
 
     @Override
     public String toString() {
+
         return Arrays.toString(arrayListInteger);
     }
 }
