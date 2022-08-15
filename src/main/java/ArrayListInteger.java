@@ -1,4 +1,3 @@
-import Exceptions.ArgumentException;
 import Exceptions.InvalidIndexException;
 import Exceptions.StorageIsFullException;
 import Exceptions.WrongElementException;
@@ -6,14 +5,14 @@ import Exceptions.WrongElementException;
 import java.util.Arrays;
 
 public class ArrayListInteger {
-    private final Integer[] arrayListInteger;
+    private final Integer[] arr;
     private int size;
 
     public ArrayListInteger(int size) {
         java.util.Random random = new java.util.Random();
-        arrayListInteger = new Integer[size];
-        for (int i = 0; i < arrayListInteger.length; i++) {
-            arrayListInteger[i] = random.nextInt(1_000_000) + 1;
+        arr = new Integer[size];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = random.nextInt(1_000_000) + 1;
         }
     }
 
@@ -29,11 +28,35 @@ public class ArrayListInteger {
         }
     }
 
+    public boolean binarySearch(Integer[] arr, Integer item) {
+        int min = 0;
+        int max = arr.length - 1;
+        while (min <= max) {
+            int mid = (min + max) / 2;
+            if (item == arr[mid]) {
+                return true;
+            }
+            if (item < arr[mid]) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+        return false;
+    }
+
+    public boolean contains(Integer item) {
+        Integer [] arrCopy = toArray(7);
+        sortInsertion(arrCopy);
+        return binarySearch(arrCopy, item);
+
+    }
+
     public Integer add(Integer item) {
 
         validateSize();
         validateItem(item);
-        arrayListInteger[size++] = item;
+        arr[size++] = item;
         return item;
     }
 
@@ -45,11 +68,11 @@ public class ArrayListInteger {
         validateIndex(index);
 
         if (index == size) {
-            arrayListInteger[size++] = item;
+            arr[size++] = item;
             return item;
         }
-        System.arraycopy(arrayListInteger, index, arrayListInteger, index + 1, size - index);
-        arrayListInteger[index] = item;
+        System.arraycopy(arr, index, arr, index + 1, size - index);
+        arr[index] = item;
         size++;
         return item;
     }
@@ -58,7 +81,7 @@ public class ArrayListInteger {
         validateIndex(index);
         validateItem(item);
 
-        arrayListInteger[index] = item;
+        arr[index] = item;
         return item;
     }
 
@@ -78,36 +101,18 @@ public class ArrayListInteger {
 
         validateIndex(index);
 
-        Integer item = arrayListInteger[index];
+        Integer item = arr[index];
         if (index != size) {
-            System.arraycopy(arrayListInteger, index + 1, arrayListInteger, index, size - index);
+            System.arraycopy(arr, index + 1, arr, index, size - index);
         }
         size--;
         return item;
     }
 
-    public boolean contains(Integer item) {
-        sortInsertion(arrayListInteger);
-        int min = 0;
-        int max = arrayListInteger.length - 1;
-        while (min <= max) {
-            int mid = (min + max) / 2;
-            if (item == arrayListInteger[mid]) {
-                return true;
-            }
-            if (item < arrayListInteger[mid]) {
-                max = mid - 1;
-            } else {
-                min = mid + 1;
-            }
-        }
-        return false;
-    }
-
 
     public int indexOf(Integer item) {
         for (int i = 0; i < size; i++) {
-            if (arrayListInteger[i].equals(item)) {
+            if (arr[i].equals(item)) {
                 return i;
             }
         }
@@ -116,7 +121,7 @@ public class ArrayListInteger {
 
     public int lastIndexOf(Integer item) {
         for (int i = size - 1; i >= 0; i--) {
-            if (arrayListInteger[i].equals(item)) {
+            if (arr[i].equals(item)) {
                 return i;
             }
         }
@@ -125,7 +130,7 @@ public class ArrayListInteger {
 
     public Integer get(int index) {
         validateIndex(index);
-        return arrayListInteger[index];
+        return arr[index];
     }
 
 //    public boolean equals(StringList otherList) throws ArgumentException {
@@ -155,7 +160,7 @@ public class ArrayListInteger {
     }
 
     private void validateSize() {
-        if (size == arrayListInteger.length) {
+        if (size == arr.length) {
             throw new StorageIsFullException();
         }
     }
@@ -167,12 +172,12 @@ public class ArrayListInteger {
     }
 
     public Integer[] toArray(int size) {
-        return Arrays.copyOf(arrayListInteger, size);
+        return Arrays.copyOf(arr, size);
     }
 
     @Override
     public String toString() {
 
-        return Arrays.toString(arrayListInteger);
+        return Arrays.toString(arr);
     }
 }
