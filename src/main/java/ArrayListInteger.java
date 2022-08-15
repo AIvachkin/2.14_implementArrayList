@@ -5,7 +5,7 @@ import Exceptions.WrongElementException;
 import java.util.Arrays;
 
 public class ArrayListInteger {
-    private final Integer[] arr;
+    private Integer[] arr;
     private int size;
 
     public ArrayListInteger(int size) {
@@ -28,6 +28,52 @@ public class ArrayListInteger {
         }
     }
 
+    public void sortRecursion(Integer[] arr) {
+        mergeSort(arr);
+    }
+
+    public static void mergeSort(Integer[] arr) {
+        if (arr.length < 2) {
+            return;
+        }
+        int mid = arr.length / 2;
+        Integer[] left = new Integer[mid];
+        Integer[] right = new Integer[arr.length - mid];
+
+        for (int i = 0; i < left.length; i++) {
+            left[i] = arr[i];
+        }
+
+        for (int i = 0; i < right.length; i++) {
+            right[i] = arr[mid + i];
+        }
+
+        mergeSort(left);
+        mergeSort(right);
+
+        merge(arr, left, right);
+    }
+
+    public static void merge(Integer[] arr, Integer[] left, Integer[] right) {
+
+        int mainP = 0;
+        int leftP = 0;
+        int rightP = 0;
+        while (leftP < left.length && rightP < right.length) {
+            if (left[leftP] <= right[rightP]) {
+                arr[mainP++] = left[leftP++];
+            } else {
+                arr[mainP++] = right[rightP++];
+            }
+        }
+        while (leftP < left.length) {
+            arr[mainP++] = left[leftP++];
+        }
+        while (rightP < right.length) {
+            arr[mainP++] = right[rightP++];
+        }
+    }
+
     public boolean binarySearch(Integer[] arr, Integer item) {
         int min = 0;
         int max = arr.length - 1;
@@ -45,8 +91,10 @@ public class ArrayListInteger {
         return false;
     }
 
+
     public boolean contains(Integer item) {
-        Integer [] arrCopy = toArray(7);
+        Integer[] arrCopy = toArray(7);
+//        sortInsertion(arrCopy);
         sortInsertion(arrCopy);
         return binarySearch(arrCopy, item);
 
@@ -54,12 +102,23 @@ public class ArrayListInteger {
 
     public Integer add(Integer item) {
 
-        validateSize();
         validateItem(item);
+
+        if (size == arr.length) {
+            int newLength = (int) (arr.length * 1.5);
+            grow(newLength);
+        }
+//        validateSize();
         arr[size++] = item;
         return item;
     }
 
+    public void grow(int newLength) {
+        Integer[] newArrayListInteger = new Integer[newLength];
+        System.arraycopy(arr, 0, newArrayListInteger, 0, arr.length);
+        arr = newArrayListInteger;
+
+    }
 
     public Integer add(int index, Integer item) {
 
